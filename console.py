@@ -5,7 +5,7 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     """class for cmd interpreter"""
-    prompt = (hbnb)
+    prompt = "(hbnb) "
 
     def do_EOF(self):
         """An end of file command"""
