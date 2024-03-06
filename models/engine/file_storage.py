@@ -4,6 +4,7 @@ import json
 from models.base_model import BaseModel
 from os import path
 
+
 class FileStorage:
     """This indicates an abstract storage engine.
 
@@ -17,7 +18,7 @@ class FileStorage:
     def all(self):
         """Gives the object dictionary."""
         return FileStorage.__objects
-    
+
     def new(sef, obj):
         """Add the "obj" with the key "<obj_class_name>.id"
         into the "__objects" dictionary.
@@ -26,10 +27,10 @@ class FileStorage:
         FileStorage.__objects["{}.{}".format(clsname, obj.id)] = obj
 
     def save(self):
-       """Serialize __objects to the JSON file __file_path."""
-       odict =  FileStorage.__objects
-       objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
-       with open(FileStorage.__file_path, "w") as f:
+        """Serialize __objects to the JSON file __file_path."""
+        odict = FileStorage.__objects
+        objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
+        with open(FileStorage.__file_path, "w") as f:
             json.dump(objdict, f)
 
     def reload(self):
@@ -43,6 +44,3 @@ class FileStorage:
                     self.new(eval(cls_name)(**o))
         except FileNotFoundError:
             return
-
-
-
